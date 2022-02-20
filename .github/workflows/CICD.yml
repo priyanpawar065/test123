@@ -53,4 +53,4 @@ jobs:
         with:
            name: artifacts        
       - name: Deploy to sandbox
-        run: mvn deploy -DmuleDeploy -Dusername="priyanpawar" -Dpassword="Pawar@2022"
+        run: mvn deploy -DmuleDeploy -Dusername=priyanpawar -Dpassword=Pawar@2022
