@@ -56,4 +56,4 @@ jobs:
         env:
           USERNAME1: ${{secrets.ANYPOINT_USERNAME}}
           PASSWORD1: ${{secrets.ANYPOINT_PASSWORD}}
-        run: mvn deploy -DmuleDeploy -Dusername="$USERNAME1" -Dpassword="$PASSWORD1" -Dtype="MICRO"
+        run: mvn deploy -DmuleDeploy
