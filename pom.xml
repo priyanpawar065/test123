@@ -39,7 +39,7 @@
 						<username>${username}</username>
 						<password>${password}</password>
 						<applicationName>${applicationName}</applicationName>
-						<environment>sandbox</environment>
+						<environment>Sandbox</environment>
 						<workerType>MICRO</workerType>
 						<objectStoreV2>true</objectStoreV2>
 						<properties>
