@@ -1,0 +1,56 @@
+# This is a basic workflow to help you get started with Actions
+name: Mulesoft API deployment in CloudHUB
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out from your repository
+       - name: Checkout
+         uses: actions/checkout@v2.4.0
+         
+         
+      # SET JAVA  
+       - name: Setup Java JDK
+         uses: actions/setup-java@v1
+         with:
+          java-version: 1.8
+       # Build using Maven
+       - name: Build/Compile Mule project
+         run: mvn -B package --file pom.xml   
+       # Upload Artifacts 
+       - name: Upload a Build Artifact
+         uses: actions/upload-artifact@main
+         with:
+          name: artifacts
+          path: target/*.jar
+      # Runs a set of commands using the runners shell
+       - name: Print Message for Build
+         run: |
+          echo Compile process END  
+          
+   # This workflow contains a single job called "build"     
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository
+      - uses: actions/checkout@v2     
+      - uses: actions/download-artifact@main
+        with:
+           name: artifacts        
+      - name: Deploy to sandbox
+        run: mvn deploy -DmuleDeploy -Dusername="priyanpawar" -Dpassword="Pawar@2022"
