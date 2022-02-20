@@ -53,4 +53,7 @@ jobs:
         with:
            name: artifacts        
       - name: Deploy to sandbox
-        run: mvn deploy -DmuleDeploy -Dusername=priyanpawar -Dpassword=Pawar@2022
+        env:
+          USERNAME1: ${{secrets.ANYPOINT_USERNAME}}
+          PASSWORD1: ${{secrets.ANYPOINT_PASSWORD}}
+        run: mvn deploy -DmuleDeploy -Dusername="$USERNAME1" -Dpassword="$PASSWORD1" -Dtype="MICRO"
